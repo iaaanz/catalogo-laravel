@@ -21,8 +21,7 @@ class CreateProductsTable extends Migration
       $table->string('basic_unit');
       $table->char('limited', 3);
       $table->decimal('in_stock', 8, 2)->nullable();
-      $table->char('active_for_sale', 3);
-      $table->string('product_image')->nullable();
+      $table->string('active_for_sale', 10);
       $table->timestamp('created_at')->nullable();
       $table->timestamp('updated_at')->nullable();
     });

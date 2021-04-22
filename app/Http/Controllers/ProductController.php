@@ -13,7 +13,7 @@ class ProductController extends Controller
 
   public function home()
   {
-    return view('home.index');
+    return view('product.create');
   }
   /**
    * Display a listing of the resource.
@@ -22,7 +22,11 @@ class ProductController extends Controller
    */
   public function index()
   {
-    return view('product.index');
+    $products = Products::query()
+      ->orderBy('name')
+      ->get();
+
+    return view('admin.product_index', compact('products'));
   }
 
   /**
@@ -32,7 +36,7 @@ class ProductController extends Controller
    */
   public function create()
   {
-    return view('product.create');
+    return view('admin.product_create');
   }
 
   /**
@@ -56,7 +60,9 @@ class ProductController extends Controller
       'active_for_sale' => $request->get('active_for_sale'),
     ]);
     if ($product->active_for_sale == NULL) {
-      $product->active_for_sale = 'off';
+      $product->active_for_sale = 'Inativo';
+    } else {
+      $product->active_for_sale = 'Ativo';
     }
     $product->save();
 
@@ -64,7 +70,6 @@ class ProductController extends Controller
       foreach ($images as $item) {
         $imageName = Str::random(15) . '.' . $item->extension();
         $item->move(public_path('images'), $imageName);
-        // $images[] = $imageName;
         $product_image = new Product_image([
           'image' => $imageName
         ]);
@@ -73,7 +78,7 @@ class ProductController extends Controller
       }
     }
 
-    return redirect('products')->with('success', 'Produto cadastrado com sucesso!');
+    return view('admin.product_create')->with('success', 'Produto cadastrado com sucesso!');
   }
 
   /**
@@ -94,7 +99,9 @@ class ProductController extends Controller
    */
   public function edit($id)
   {
-    //
+    $product = Products::find($id);
+
+    return view('admin.product_edit', compact('product'));
   }
 
   /**
