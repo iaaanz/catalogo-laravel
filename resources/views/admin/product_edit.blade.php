@@ -16,7 +16,7 @@
     {{ session('success') }}
   </div>
   @endif
-  <form method="POST" action="{{ route('admin.product.update') }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('admin.product.update', ['id'=> $product->id]) }}" enctype="multipart/form-data">
     @csrf
     <div class="row">
       <div class="form-group col-md-6">
@@ -71,6 +71,7 @@
       <div class="form-group col-md-1 d-flex align-items-end">
         <button type="submit" class="btn btn-primary">Salvar</button>
       </div>
+      
     </div>
   </form>
 </div>

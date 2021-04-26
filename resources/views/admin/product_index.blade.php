@@ -1,13 +1,7 @@
 @extends('admin.layout')
 
 @section('conteudo')
-<!-- ============================================================== -->
-<!-- Page wrapper  -->
-<!-- ============================================================== -->
 <div class="page-wrapper">
-  <!-- ============================================================== -->
-  <!-- Bread crumb and right sidebar toggle -->
-  <!-- ============================================================== -->
   <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
       <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -16,10 +10,29 @@
     </div>
   </div>
   <div class="container-fluid">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
+    </div>
+    @endif
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
-          <h3 class="box-title">Produtos</h3>
+          <div class="d-flex justify-content-between">
+            <h3 class="box-title">Produtos</h3>
+            <button class="btn btn-success text-white me-3">
+              <a class="text-white" href="{{ route('admin.product.create') }}">Cadastrar</a>
+            </button>
+          </div>
           <div class="table-responsive">
             <table class="table text-nowrap">
               <thead>
@@ -38,42 +51,32 @@
                 <tr>
                   <td>{{$product->id}}</td>
                   <td>{{$product->name}}</td>
-                  <td>{{$product->price_per_unit}}</td>
+                  <td>R$ {{$product->price_per_unit}}</td>
                   <td>{{$product->in_stock}}</td>
                   <td>{{$product->basic_unit}}</td>
                   <td>{{$product->active_for_sale}}</td>
                   <td>
-                    <button type="button" class="btn btn-primary">
-                      <a href="{{route('admin.product.edit', ['id'=> 1])}}">
-                        <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
-                      </a>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                      <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
-                    </button>
-                  </td> 
-                </tr> 
+                    <span class="d-flex justify-content-around">
+                      <button type="button" class="btn btn-primary">
+                        <a href="{{ route('admin.product.edit', ['id'=> $product->id]) }}">
+                          <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
+                        </a>
+                      </button>
+                      <button type="button" class="btn btn-danger" @click="confirmProduct({{$product->id}})">
+                        <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
+                      </button>
+                    </span>
+                  </td>
+                </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      {{ $products->links() }}
     </div>
-    <!-- ============================================================== -->
-    <!-- End PAge Content -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right sidebar -->
-    <!-- ============================================================== -->
-    <!-- .right-sidebar -->
-    <!-- ============================================================== -->
-    <!-- End Right sidebar -->
-    <!-- ============================================================== -->
   </div>
 </div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
-</div>
+<modal_remove v-if="showModalRemove" :product="selectProduct" @confirm="deleteProduct" @cancel="cancelDelete" />
 @endsection

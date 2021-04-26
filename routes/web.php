@@ -43,5 +43,9 @@ Route::prefix('/v1')->group(function () {
   Route::post('/admin/produtos', 'ProductController@store')->name("admin.product.store");
   Route::get('/admin/produtos', 'ProductController@index')->name("admin.product.index");
   Route::get('/admin/produtos/edit/{id}', 'ProductController@edit')->name('admin.product.edit');
-  Route::post('/admin/produtos/edit}', 'ProductController@update')->name('admin.product.update');
+  Route::post('/admin/produtos/edit/{id}', 'ProductController@update')->name('admin.product.update');
+  Route::delete('/admin/produtos/delete/{id}', 'ProductController@destroy')->name('admin.product.delete');
+
+  // Teste
+  // Route::get('/teste', 'VueTesteController@index');
 });
