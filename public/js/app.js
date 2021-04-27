@@ -1985,6 +1985,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["product"],
   methods: {
@@ -37687,7 +37704,7 @@ var render = function() {
           _c(
             "h1",
             { staticClass: "text-center text-secondary font-weight-normal" },
-            [_vm._v("Você tem certeza?")]
+            [_vm._v("\n          Você tem certeza?\n        ")]
           ),
           _vm._v(" "),
           _vm._m(1),
@@ -37700,7 +37717,7 @@ var render = function() {
                 staticStyle: { "background-color": "rgb(173, 173, 173)" },
                 on: { click: _vm.onCancel }
               },
-              [_vm._v("\n              Cancelar\n            ")]
+              [_vm._v("\n            Cancelar\n          ")]
             ),
             _vm._v(" "),
             _c(
@@ -37710,7 +37727,7 @@ var render = function() {
                 staticStyle: { "background-color": "#F5506F", width: "110px" },
                 on: { click: _vm.onConfirm }
               },
-              [_vm._v("\n              Delete\n            ")]
+              [_vm._v("\n            Delete\n          ")]
             )
           ])
         ])
@@ -37740,7 +37757,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "px-5 text-center" }, [
       _c("h6", { staticStyle: { color: "rgb(122, 122, 122)" } }, [
-        _vm._v("Essa operação não pode ser desfeita.")
+        _vm._v("\n            Essa operação não pode ser desfeita.\n          ")
       ])
     ])
   }

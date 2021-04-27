@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreItemRegistration;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Products;
-use App\Product_image;
+use App\ProductImage;
 
 class ProductController extends Controller
 {
@@ -16,11 +16,7 @@ class ProductController extends Controller
   {
     return view('product.create');
   }
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+
   public function index()
   {
     $products = Products::orderBy('id')->paginate(10);
@@ -28,22 +24,11 @@ class ProductController extends Controller
     return view('admin.product_index', compact('products'));
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function create()
   {
     return view('admin.product_create');
   }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
   public function store(StoreItemRegistration $request)
   {
     $request->validated();
@@ -69,7 +54,7 @@ class ProductController extends Controller
       foreach ($images as $item) {
         $imageName = Str::random(15) . '.' . $item->extension();
         $item->move(public_path('images'), $imageName);
-        $product_image = new Product_image([
+        $product_image = new ProductImage([
           'image' => $imageName
         ]);
         $product_image->product()->associate($product);
@@ -80,22 +65,10 @@ class ProductController extends Controller
     return redirect('/v1/admin/produtos')->with('success', 'Produto cadastrado com sucesso!');
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function show($id)
   {
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit($id)
   {
     $product = Products::find($id);
@@ -103,13 +76,6 @@ class ProductController extends Controller
     return view('admin.product_edit', compact('product'));
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function update(StoreItemRegistration $request, $id)
   {
     $request->validated();
@@ -135,10 +101,10 @@ class ProductController extends Controller
       foreach ($images as $item) {
         $imageName = Str::random(15) . '.' . $item->extension();
         $item->move(public_path('images'), $imageName);
-        $product_image = new Product_image([
+        $product_image = new ProductImage([
           'image' => $imageName
         ]);
-        Product_image::where('id_product', '=', $product->id)->delete();
+        ProductImage::where('id_product', '=', $product->id)->delete();
         $product_image->product()->associate($product);
         $product_image->save();
       }
@@ -147,12 +113,6 @@ class ProductController extends Controller
     return redirect('/v1/admin/produtos')->with('success', 'Produto alterado com sucesso!');
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function destroy($id)
   {
     Products::destroy($id);

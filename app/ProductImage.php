@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product_image extends Model
+class ProductImage extends Model
 {
   protected $fillable = [
     'id_product',
     'image'
   ];
+
   public $timestamps = false;
 
   public function product()
