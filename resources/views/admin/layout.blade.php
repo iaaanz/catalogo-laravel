@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="{{asset('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
   <link rel="stylesheet" href="{{asset('bootstrap/dist/css/bootstrap.css')}}">
   <link href="{{asset('css/style_dashboard.min.css')}}" rel="stylesheet">
-
 </head>
 <style>
   #overlay {
@@ -43,7 +42,7 @@
 </style>
 
 <body>
-  <div class="vue_all">
+  <div class="app">
     <div class="preloader">
       <div class="lds-ripple">
         <div class="lds-pos"></div>
@@ -80,12 +79,12 @@
                   <span class="hide-menu">Dashboard</span>
                 </a>
               </li>
-              <li class="sidebar-item">
+              {{-- <li class="sidebar-item">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.conta')}}" aria-expanded="false">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <span class="hide-menu">Conta</span>
                 </a>
-              </li>
+              </li> --}}
               <li class="sidebar-item">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/test/categories" aria-expanded="false">
                   <i class="fa fa-table" aria-hidden="true"></i>
@@ -135,8 +134,7 @@
   <script src="{{asset('js/waves.js')}}"></script>
   <script src="{{asset('js/sidebarmenu.js')}}"></script>
   <script src="{{asset('js/custom.js')}}"></script>
-  {{-- <script src="{{asset('js/pages/dashboards/dashboard1.js')}}"></script> --}}
-
+  
   <script>
     $(document).ready(function() {
       $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {

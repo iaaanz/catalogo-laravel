@@ -1,0 +1,50 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": ["airbnb", "plugin:vue/recommended"],
+  "globals": {
+    "Vue": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
+  },
+  "rules": {
+    "block-spacing": 0,
+    "class-methods-use-this": 0,
+    "comma-dangle": 0,
+    "consistent-return": 0,
+    "func-names": 0,
+    "object-shorthand": 0,
+    "one-var": 0,
+    "one-var-declaration-per-line": 0,
+    "padded-blocks": 0,
+    "semi": 0,
+    "wrap-iife": 0,
+    "arrow-parens": 0,
+    "arrow-body-style": 1,
+    "camelcase": 1,
+    "prefer-arrow-callback": 1,
+    "prefer-template": 1,
+    "quote-props": 0,
+    "radix": 1,
+    "strict": 1,
+    "vars-on-top": 1,
+    "indent": [2, 2],
+    "no-plusplus": 0,
+    "no-shadow": 0,
+    "no-underscore-dangle": 0,
+    "no-param-reassign": 1,
+    "no-useless-escape": 1,
+    "no-var": 1,
+    "no-use-before-define": [2, { "functions": false }],
+    "no-restricted-syntax": 0,
+    "no-console": 0,
+    "no-restricted-globals": 0,
+    "import/no-extraneous-dependencies": 0
+  }
+}

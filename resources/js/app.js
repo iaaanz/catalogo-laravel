@@ -1,14 +1,10 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+/* eslint-disable no-unused-vars */
 
-const { default: axios } = require("axios");
+const { default: axios } = require('axios');
 
-require("./bootstrap");
+require('./bootstrap');
 
-window.Vue = require("vue");
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -18,28 +14,19 @@ window.Vue = require("vue");
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component("modal_remove", require("./components/modal_remove.vue").default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('ModalRemove', require('./components/ModalRemove.vue').default);
 
 const vm = new Vue({
-  el: ".vue_all",
+  el: '.app',
   data: {
     showModalRemove: false,
     selectProduct: null
   },
   methods: {
-    confirmProduct(id_produto) {
+    confirmProduct(idProduto) {
       this.showModalRemove = true;
-      this.selectProduct = id_produto;
-      console.log("confirmProduct:" + id_produto);
+      this.selectProduct = idProduto;
+      console.log(`confirmProduct:${idProduto}`);
     },
     deleteProduct() {
       axios
@@ -51,14 +38,14 @@ const vm = new Vue({
         .catch(err => {
           console.log(err);
         });
-      console.log("deletou: " + this.selectProduct);
+      console.log(`deletou: ${this.selectProduct}`);
       this.showModalRemove = false;
       this.selectProduct = null;
     },
     cancelDelete() {
       this.showModalRemove = false;
       this.selectProduct = null;
-      console.log("cancelou");
+      console.log('cancelou');
     }
   }
 });
