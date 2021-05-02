@@ -29,9 +29,10 @@
         <div class="white-box">
           <div class="d-flex justify-content-between">
             <h3 class="box-title">Produtos</h3>
-            <button class="btn btn-success text-white me-3">
-              <a class="text-white" href="{{ route('admin.product.create') }}">Cadastrar</a>
-            </button>
+            <a class="text-white" href="{{ route('admin.product.create') }}">
+              <button class="btn btn-success text-white me-3">Cadastrar
+              </button>
+            </a>
           </div>
           <div class="table-responsive">
             <table class="table text-nowrap">
@@ -57,11 +58,11 @@
                   <td>{{$product->active_for_sale}}</td>
                   <td>
                     <span class="d-flex justify-content-around">
-                      <button type="button" class="btn btn-primary">
-                        <a href="{{ route('admin.product.edit', ['id'=> $product->id]) }}">
+                      <a href="{{ route('admin.product.edit', ['id'=> $product->id]) }}">
+                        <button type="button" class="btn btn-primary">
                           <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
-                        </a>
-                      </button>
+                        </button>  
+                      </a>
                       <button type="button" class="btn btn-danger" @click="confirmProduct({{$product->id}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>

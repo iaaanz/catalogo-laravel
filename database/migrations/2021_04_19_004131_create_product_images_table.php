@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductImagesTable extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
+
   public function up()
   {
     Schema::create('product_images', function (Blueprint $table) {
@@ -18,18 +14,14 @@ class CreateProductImagesTable extends Migration
       $table->unsignedBigInteger('id_product');
       $table->string('image');
 
-      $table->foreign('id_product')
+      $table
+        ->foreign('id_product')
         ->references('id')
         ->on('products')
         ->onDelete('cascade');
     });
   }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
   public function down()
   {
     Schema::dropIfExists('product_images');

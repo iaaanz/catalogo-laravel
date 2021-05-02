@@ -6,16 +6,10 @@
           class="modal-header"
           style="border-bottom: 0px; padding-bottom: 0rem"
         >
-          <button
-            class="btn-close"
-            @click="$emit('close')"
-          />
+          <button class="btn-close" @click="$emit('close')" />
         </div>
         <div class="modal-body">
-          <div
-            class="text-center"
-            style="color: #f5506f"
-          >
+          <div class="text-center" style="color: #f5506f">
             <i
               class="far fa-times-circle my-3"
               style="font-size: 120px; font-weight: 10"
@@ -53,16 +47,20 @@
 
 <script>
 export default {
-  // name: 'ModalRemove',
-  // props: ['product'],
+  props: {
+    product: {
+      type: Number,
+      default: 0,
+    },
+  },
   methods: {
     onConfirm() {
       this.$emit('confirm');
     },
     onCancel() {
       this.$emit('cancel');
-    }
-  }
+    },
+  },
 };
 </script>
 

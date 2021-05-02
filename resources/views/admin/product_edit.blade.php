@@ -56,6 +56,13 @@
           @endif
         </select>
       </div>
+      <div class="form-group col-md-2">
+        <label for="category">Categoria</label>
+        <select id="category" class="form-control" name="category">
+          <option>1</option>
+          <option selected>2</option>
+        </select>
+      </div>
       <div class="form-group col-md-1">
         <label>Status</label>
         <div class="form-check">

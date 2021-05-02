@@ -45,6 +45,16 @@
     "no-restricted-syntax": 0,
     "no-console": 0,
     "no-restricted-globals": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "vue/max-attributes-per-line": [
+      2,
+      {
+        "singleline": 20,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ]
   }
 }

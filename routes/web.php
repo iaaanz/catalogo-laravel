@@ -35,4 +35,8 @@ Route::prefix('/v1')->group(function () {
   Route::get('/admin/produtos/edit/{id}', 'ProductController@edit')->name('admin.product.edit');
   Route::post('/admin/produtos/edit/{id}', 'ProductController@update')->name('admin.product.update');
   Route::delete('/admin/produtos/delete/{id}', 'ProductController@destroy')->name('admin.product.delete');
+
+
+  // CategoriesController
+
 });

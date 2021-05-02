@@ -2002,15 +2002,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  // name: 'ModalRemove',
-  // props: ['product'],
+  props: {
+    product: {
+      type: Number,
+      "default": 0
+    }
+  },
   methods: {
     onConfirm: function onConfirm() {
       this.$emit('confirm');
@@ -50614,15 +50612,13 @@ var vm = new Vue({
   methods: {
     confirmProduct: function confirmProduct(idProduto) {
       this.showModalRemove = true;
-      this.selectProduct = idProduto;
-      console.log("confirmProduct:".concat(idProduto));
+      this.selectProduct = idProduto; // console.log(`confirmProduct:${idProduto}`);
     },
     deleteProduct: function deleteProduct() {
       axios["delete"]("/v1/admin/produtos/delete/".concat(this.selectProduct)).then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         location.reload();
-      })["catch"](function (err) {
-        console.log(err);
+      })["catch"](function (err) {// console.log(err);
       });
       console.log("deletou: ".concat(this.selectProduct));
       this.showModalRemove = false;
@@ -50630,8 +50626,7 @@ var vm = new Vue({
     },
     cancelDelete: function cancelDelete() {
       this.showModalRemove = false;
-      this.selectProduct = null;
-      console.log('cancelou');
+      this.selectProduct = null; // console.log('cancelou');
     }
   }
 });

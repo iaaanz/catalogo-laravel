@@ -26,17 +26,17 @@ const vm = new Vue({
     confirmProduct(idProduto) {
       this.showModalRemove = true;
       this.selectProduct = idProduto;
-      console.log(`confirmProduct:${idProduto}`);
+      // console.log(`confirmProduct:${idProduto}`);
     },
     deleteProduct() {
       axios
         .delete(`/v1/admin/produtos/delete/${this.selectProduct}`)
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           location.reload();
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
         });
       console.log(`deletou: ${this.selectProduct}`);
       this.showModalRemove = false;
@@ -45,7 +45,7 @@ const vm = new Vue({
     cancelDelete() {
       this.showModalRemove = false;
       this.selectProduct = null;
-      console.log('cancelou');
+      // console.log('cancelou');
     }
   }
 });
