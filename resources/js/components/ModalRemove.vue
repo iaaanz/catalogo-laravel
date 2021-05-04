@@ -6,7 +6,7 @@
           class="modal-header"
           style="border-bottom: 0px; padding-bottom: 0rem"
         >
-          <button class="btn-close" @click="$emit('close')" />
+          <button class="btn-close" @click="$emit('cancel')" />
         </div>
         <div class="modal-body">
           <div class="text-center" style="color: #f5506f">

@@ -6,20 +6,18 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
+Vue.component(
+  'ModalCreateCategory',
+  require('./components/ModalCreateCategory.vue').default
+);
 Vue.component('ModalRemove', require('./components/ModalRemove.vue').default);
 
 const vm = new Vue({
   el: '.app',
   data: {
     showModalRemove: false,
+    showModalRegisterCategory: false,
+    categoryName: '',
     selectProduct: null
   },
   methods: {
@@ -40,9 +38,18 @@ const vm = new Vue({
       this.showModalRemove = false;
       this.selectProduct = null;
     },
-    cancelDelete() {
+    cancelDeleteProduct() {
       this.showModalRemove = false;
       this.selectProduct = null;
+    },
+    deleteCategory() {
+      // fazer
+    },
+    registerCategory() {
+      console.log(this.categoryName);
+    },
+    cancelRegisterCategory() {
+      this.showModalRegisterCategory = false;
     }
   }
 });

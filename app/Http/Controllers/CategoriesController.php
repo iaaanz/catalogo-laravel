@@ -6,6 +6,7 @@ use App\Categories;
 
 class CategoriesController extends Controller
 {
+
   public function index()
   {
     $categories = Categories::orderBy('id')->paginate(10);
@@ -17,8 +18,14 @@ class CategoriesController extends Controller
   {
   }
 
-  public function store()
+  // fazer request que valida depois : )
+  public function store($request)
   {
+    $category = new Categories([
+      'category_name' => $request->get('category_name')
+    ]);
+
+    $category->save();
   }
 
   public function edit()

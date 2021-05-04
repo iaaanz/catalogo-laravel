@@ -29,8 +29,9 @@
         <div class="white-box">
           <div class="d-flex justify-content-between">
             <h3 class="box-title">Categorias</h3>
-            <a class="text-white" href="">
-              <button class="btn btn-success text-white me-3">Cadastrar
+            <a class="text-white">
+              <button class="btn btn-success text-white me-3"
+              @click="showModalRegisterCategory = true">Cadastrar
               </button>
             </a>
           </div>
@@ -111,6 +112,6 @@
   </div>
 </div>
 <transition name="slide-fade">
-  <modal-remove v-if="showModalRemove" :product="selectProduct" @confirm="deleteProduct" @cancel="cancelDelete"/>
+  <modal-create-category v-if="showModalRegisterCategory" @confirm="registerCategory" @cancel="cancelRegisterCategory"/>
 </transition>
 @endsection

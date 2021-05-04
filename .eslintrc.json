@@ -8,7 +8,7 @@
   "globals": {
     "Vue": true
   },
-  "parser": "vue-eslint-parser",
+  // "parser": "vue-eslint-parser",
   "parserOptions": {
     "parser": "babel-eslint",
     "sourceType": "module"
@@ -55,6 +55,8 @@
           "allowFirstLine": false
         }
       }
-    ]
+    ],
+    "vue/singleline-html-element-content-newline": 0,
+    "vue/html-self-closing": 0
   }
 }
