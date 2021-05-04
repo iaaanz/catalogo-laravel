@@ -10,10 +10,8 @@ class Categories extends Model
     'category_name'
   ];
 
-  // public $timestamps = false;
-
-  public function product()
-  {
-    return $this->belongsTo(Products::class, 'id_product', 'id');
-  }
+  // public function product()
+  // {
+  //   return $this->belongsTo(Products::class, 'id_product', 'id');
+  // }
 }

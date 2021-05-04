@@ -86,7 +86,7 @@
                 </a>
               </li> --}}
               <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/test/categories" aria-expanded="false">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.categories.index') }}" aria-expanded="false">
                   <i class="fa fa-table" aria-hidden="true"></i>
                   <span class="hide-menu">Categorias</span>
                 </a>

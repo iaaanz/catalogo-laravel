@@ -38,5 +38,5 @@ Route::prefix('/v1')->group(function () {
 
 
   // CategoriesController
-
+  Route::get('/admin/produtos/categorias', 'CategoriesController@index')->name('admin.categories.index');
 });
