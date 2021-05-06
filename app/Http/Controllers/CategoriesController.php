@@ -18,7 +18,7 @@ class CategoriesController extends Controller
   {
   }
 
-  // fazer request que valida depois : )
+  // TODO: fazer request que valida depois : )
   public function store($request)
   {
     $category = new Categories([

@@ -1993,9 +1993,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  model: {
+    event: 'send'
+  },
   props: {
-    category: {
+    value: {
       type: String,
       "default": ''
     }
@@ -38456,7 +38463,21 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "modal-body" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "category" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  on: {
+                    input: function($event) {
+                      return _vm.$emit("send", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "text-end pt-3" }, [
             _c(
@@ -38484,20 +38505,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "category" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50793,8 +50801,8 @@ var vm = new Vue({
   data: {
     showModalRemove: false,
     showModalRegisterCategory: false,
-    categoryName: '',
-    selectProduct: null
+    selectProduct: null,
+    category: null
   },
   methods: {
     confirmProduct: function confirmProduct(idProduto) {
@@ -50818,7 +50826,14 @@ var vm = new Vue({
     deleteCategory: function deleteCategory() {// fazer
     },
     registerCategory: function registerCategory() {
-      console.log(this.categoryName);
+      console.log("Categoria: ".concat(this.category));
+      axios.post('/v1/admin/categorias/create', {
+        category: this.category
+      }).then(function (res) {
+        console.log('deu boa');
+      })["catch"](function (res) {
+        console.log('deu ruim :/');
+      });
     },
     cancelRegisterCategory: function cancelRegisterCategory() {
       this.showModalRegisterCategory = false;
@@ -51065,8 +51080,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\PROJETOS\WEB\exerc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\PROJETOS\WEB\exerc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\projects\web\catalogo-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\projects\web\catalogo-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

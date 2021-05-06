@@ -17,8 +17,8 @@ const vm = new Vue({
   data: {
     showModalRemove: false,
     showModalRegisterCategory: false,
-    categoryName: '',
-    selectProduct: null
+    selectProduct: null,
+    category: null
   },
   methods: {
     confirmProduct(idProduto) {
@@ -46,7 +46,17 @@ const vm = new Vue({
       // fazer
     },
     registerCategory() {
-      console.log(this.categoryName);
+      console.log(`Categoria: ${this.category}`);
+      axios
+        .post('/v1/admin/categorias/create', {
+          category: this.category
+        })
+        .then(res => {
+          console.log('deu boa');
+        })
+        .catch(res => {
+          console.log('deu ruim :/');
+        });
     },
     cancelRegisterCategory() {
       this.showModalRegisterCategory = false;

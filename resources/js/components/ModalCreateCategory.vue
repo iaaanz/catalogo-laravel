@@ -10,7 +10,11 @@
           <div class="category">
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" />
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="$emit('send', $event.target.value)"
+                />
               </div>
             </div>
           </div>
@@ -38,8 +42,11 @@
 
 <script>
 export default {
+  model: {
+    event: 'send',
+  },
   props: {
-    category: {
+    value: {
       type: String,
       default: '',
     },
