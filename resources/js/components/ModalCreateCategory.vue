@@ -11,12 +11,13 @@
             <div class="row">
               <div class="col">
                 <input
+                  ref="category"
                   type="text"
                   class="form-control"
                   @input="$emit('send', $event.target.value)"
                 />
               </div>
-              <span v-if="msg">{{ msg }}</span>
+              <!-- <span v-if="msg">{{ msg }}</span> -->
             </div>
           </div>
           <div class="text-end pt-3">
@@ -54,17 +55,26 @@ export default {
   },
   data: function () {
     return {
-      msg: '',
+      /**  TODO: Tratar no front quando a categoria for inválida
+       *    e qundo for sucesso para recarregar SOMENTE as categorias
+       *    e não toda a página.
+       */
     };
   },
   methods: {
-    // TODO: Fazer função para validar o input
-    validateCategory() {
-      console.log(`Input: ${this.value} / Msg: ${this.msg}`);
+    validateCategory(category) {
+      if (!category) {
+        this.$refs.category.focus();
+        return false;
+      }
+      return true;
     },
     onConfirm() {
-      this.validateCategory();
-      // this.$emit('confirm');
+      if (!this.validateCategory(this.value)) {
+        return false;
+      }
+
+      this.$emit('confirm');
     },
     onCancel() {
       this.$emit('cancel');

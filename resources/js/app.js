@@ -53,6 +53,7 @@ const vm = new Vue({
         })
         .then(res => {
           console.log(`deu boa: ${res.data.category}`);
+          this.showModalRegisterCategory = false;
         })
         .catch(err => {
           console.log(`deu ruim :/ : ${err.data}`);
