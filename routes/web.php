@@ -38,6 +38,6 @@ Route::prefix('/v1')->group(function () {
 
     // CategoriesController
     Route::get('/categorias', 'CategoriesController@index')->name('admin.categories.index');
-    Route::get('/categorias/create', 'CategoriesController@store')->name('admin.categories,store');
+    Route::post('/categorias/create', 'CategoriesController@store')->name('admin.categories,store');
   });
 });

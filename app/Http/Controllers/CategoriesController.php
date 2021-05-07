@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -19,13 +20,16 @@ class CategoriesController extends Controller
   }
 
   // TODO: fazer request que valida depois : )
-  public function store($request)
+  public function store(Request $request)
   {
+
     $category = new Categories([
-      'category_name' => $request->get('category_name')
+      'category_name' => $request->get('category')
     ]);
 
     $category->save();
+
+    return response()->json(["category" => $request->get('category')]);
   }
 
   public function edit()

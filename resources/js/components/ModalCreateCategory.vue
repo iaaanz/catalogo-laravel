@@ -16,6 +16,7 @@
                   @input="$emit('send', $event.target.value)"
                 />
               </div>
+              <span v-if="msg">{{ msg }}</span>
             </div>
           </div>
           <div class="text-end pt-3">
@@ -51,9 +52,19 @@ export default {
       default: '',
     },
   },
+  data: function () {
+    return {
+      msg: '',
+    };
+  },
   methods: {
+    // TODO: Fazer função para validar o input
+    validateCategory() {
+      console.log(`Input: ${this.value} / Msg: ${this.msg}`);
+    },
     onConfirm() {
-      this.$emit('confirm');
+      this.validateCategory();
+      // this.$emit('confirm');
     },
     onCancel() {
       this.$emit('cancel');

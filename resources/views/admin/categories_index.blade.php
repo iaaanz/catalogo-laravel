@@ -112,6 +112,6 @@
   </div>
 </div>
 <transition name="slide-fade">
-  <modal-create-category v-model="category" @confirm="registerCategory" v-if="showModalRegisterCategory"/>
+  <modal-create-category v-model="category" @confirm="registerCategory" @cancel="cancelRegisterCategory" v-if="showModalRegisterCategory"/>
 </transition>
 @endsection

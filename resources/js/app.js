@@ -52,10 +52,10 @@ const vm = new Vue({
           category: this.category
         })
         .then(res => {
-          console.log('deu boa');
+          console.log(`deu boa: ${res.data.category}`);
         })
-        .catch(res => {
-          console.log('deu ruim :/');
+        .catch(err => {
+          console.log(`deu ruim :/ : ${err.data}`);
         });
     },
     cancelRegisterCategory() {
