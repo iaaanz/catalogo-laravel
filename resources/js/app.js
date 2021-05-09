@@ -6,10 +6,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.component(
-  'ModalCreateCategory',
-  require('./components/ModalCreateCategory.vue').default
-);
+Vue.component('ModalTransition', require('./transitions/ModalTransition.vue').default);
+Vue.component('ModalCreateCategory', require('./components/ModalCreateCategory.vue').default);
 Vue.component('ModalRemove', require('./components/ModalRemove.vue').default);
 
 const vm = new Vue({
@@ -17,8 +15,7 @@ const vm = new Vue({
   data: {
     showModalRemove: false,
     showModalRegisterCategory: false,
-    selectProduct: null,
-    category: null
+    selectProduct: null
   },
   methods: {
     confirmProduct(idProduto) {
@@ -34,7 +31,6 @@ const vm = new Vue({
         .catch(err => {
           console.log(err);
         });
-      console.log(`deletou: ${this.selectProduct}`);
       this.showModalRemove = false;
       this.selectProduct = null;
     },
@@ -42,22 +38,11 @@ const vm = new Vue({
       this.showModalRemove = false;
       this.selectProduct = null;
     },
+    openCreateCategory() {
+      this.showModalRegisterCategory = true;
+    },
     deleteCategory() {
       // fazer
-    },
-    registerCategory() {
-      console.log(`Categoria: ${this.category}`);
-      axios
-        .post('/v1/admin/categorias/create', {
-          category: this.category
-        })
-        .then(res => {
-          console.log(`deu boa: ${res.data.category}`);
-          this.showModalRegisterCategory = false;
-        })
-        .catch(err => {
-          console.log(`deu ruim :/ : ${err.data}`);
-        });
     },
     cancelRegisterCategory() {
       this.showModalRegisterCategory = false;

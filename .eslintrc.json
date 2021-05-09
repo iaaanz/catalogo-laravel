@@ -2,13 +2,14 @@
   "env": {
     "browser": true,
     "es2020": true,
-    "node": true
+    "node": true,
+    "jquery": true
   },
   "extends": ["airbnb", "plugin:vue/recommended"],
   "globals": {
     "Vue": true
   },
-  // "parser": "vue-eslint-parser",
+  "parser": "vue-eslint-parser",
   "parserOptions": {
     "parser": "babel-eslint",
     "sourceType": "module"
@@ -35,6 +36,7 @@
     "strict": 1,
     "vars-on-top": 1,
     "indent": [2, 2],
+    "max-len": ["error", { "code": 100 }],
     "no-plusplus": 0,
     "no-shadow": 0,
     "no-underscore-dangle": 0,
@@ -45,6 +47,7 @@
     "no-restricted-syntax": 0,
     "no-console": 0,
     "no-restricted-globals": 0,
+    "space-before-function-paren": 0,
     "import/no-extraneous-dependencies": 0,
     "vue/max-attributes-per-line": [
       2,

@@ -10,12 +10,7 @@
           <div class="category">
             <div class="row">
               <div class="col">
-                <input
-                  ref="category"
-                  type="text"
-                  class="form-control"
-                  @input="$emit('send', $event.target.value)"
-                />
+                <input ref="category" v-model="category" type="text" class="form-control" />
               </div>
               <!-- <span v-if="msg">{{ msg }}</span> -->
             </div>
@@ -42,19 +37,24 @@
   </div>
 </template>
 
+  <!--
+    Old input, send to app.js:
+
+    <input
+    ref="category"
+    type="text"
+    class="form-control"
+    @input="$emit('send', $event.target.value)"
+  /> -->
+
 <script>
+import axios from 'axios';
+
 export default {
-  model: {
-    event: 'send',
-  },
-  props: {
-    value: {
-      type: String,
-      default: '',
-    },
-  },
-  data: function () {
+  data() {
     return {
+      category: null,
+
       /**  TODO: Tratar no front quando a categoria for inválida
        *    e qundo for sucesso para recarregar SOMENTE as categorias
        *    e não toda a página.
@@ -70,11 +70,22 @@ export default {
       return true;
     },
     onConfirm() {
-      if (!this.validateCategory(this.value)) {
+      if (!this.validateCategory(this.category)) {
         return false;
       }
 
-      this.$emit('confirm');
+      axios
+        .post('/v1/admin/categorias/create', {
+          category: this.category,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(`deu ruim :/ : ${err.data}`);
+        });
     },
     onCancel() {
       this.$emit('cancel');
@@ -82,19 +93,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
-</style>

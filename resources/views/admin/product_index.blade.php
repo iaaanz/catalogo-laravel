@@ -79,7 +79,7 @@
     </div>
   </div>
 </div>
-<transition name="slide-fade">
+<modal-transition>
   <modal-remove v-if="showModalRemove" :product="selectProduct" @confirm="deleteProduct" @cancel="cancelDeleteProduct"/>
-</transition>
+<modal-transition>
 @endsection

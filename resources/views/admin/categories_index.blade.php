@@ -31,7 +31,7 @@
             <h3 class="box-title">Categorias</h3>
             <a class="text-white">
               <button class="btn btn-success text-white me-3"
-              @click="showModalRegisterCategory = true">Cadastrar
+              @click="openCreateCategory">Cadastrar
               </button>
             </a>
           </div>
@@ -111,7 +111,7 @@
     </div>
   </div>
 </div>
-<transition name="slide-fade">
-  <modal-create-category v-model="category" @confirm="registerCategory" @cancel="cancelRegisterCategory" v-if="showModalRegisterCategory"/>
-</transition>
+<modal-transition>
+  <modal-create-category v-if="showModalRegisterCategory" @cancel="cancelRegisterCategory"/>
+</modal-transition>
 @endsection
