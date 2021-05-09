@@ -5,15 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-  <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('fonts/font-awesome/css/font-awesome.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap_home.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/style_home.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('css/nivo-lightbox/nivo-lightbox.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('css/nivo-lightbox/default.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('fonts/font-awesome/css/font-awesome.css')}}">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 </head>
 
@@ -100,13 +94,10 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="{{asset('js/jquery.1.11.1.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/bootstrap.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/SmoothScroll.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/nivo-lightbox.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery.isotope.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/jqBootstrapValidation.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/contact_me.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
   <script>
     $(document).ready(function() {
