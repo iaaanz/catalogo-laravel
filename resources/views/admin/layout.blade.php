@@ -7,10 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title></title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('plugins/images/favicon.png')}}">
-  <link href="{{asset('plugins/bower_components/chartist/dist/chartist.min.css')}}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
   <link rel="stylesheet" href="{{asset('bootstrap/dist/css/bootstrap.css')}}">
   <link href="{{asset('css/style_dashboard.min.css')}}" rel="stylesheet">
 </head>
@@ -126,12 +124,10 @@
       </footer>
     </div>
   </div>
-  <script src="{{asset('plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
-  <script src="{{asset('plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+  <script src="{{asset('js/jquery.1.11.1.js')}}"></script>
   <script src="{{asset('bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('js/app-style-switcher.js')}}"></script>
   <script src="{{asset('js/app.js')}}" defer></script>
-  <script src="{{asset('js/waves.js')}}"></script>
   <script src="{{asset('js/sidebarmenu.js')}}"></script>
   <script src="{{asset('js/custom.js')}}"></script>
   
