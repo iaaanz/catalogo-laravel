@@ -39,5 +39,7 @@ Route::prefix('/v1')->group(function () {
     // CategoriesController
     Route::get('/categorias', 'CategoriesController@index')->name('admin.categories.index');
     Route::post('/categorias/create', 'CategoriesController@store')->name('admin.categories,store');
+    Route::patch('/categorias/edit/{id}', 'CategoriesController@update')->name('admin.categories.update');
+    Route::delete('/categorias/delete/{id}', 'CategoriesController@delete')->name('admin.categories.delete');
   });
 });

@@ -37,12 +37,6 @@
 
 <script>
 export default {
-  props: {
-    product: {
-      type: Number,
-      default: 0,
-    },
-  },
   methods: {
     onConfirm() {
       this.$emit('confirm');

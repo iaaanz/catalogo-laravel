@@ -31,7 +31,7 @@
             <h3 class="box-title">Categorias</h3>
             <a class="text-white">
               <button class="btn btn-success text-white me-3"
-              @click="openCreateCategory">Cadastrar
+              @click="showCreateCategory">Cadastrar
               </button>
             </a>
           </div>
@@ -51,12 +51,10 @@
                   <td>{{ $category->category_name }}</td>
                   <td>
                     <span class="d-flex justify-content-end">
-                      <a href="">
-                        <button type="button" class="btn btn-primary">
-                          <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
-                        </button>  
-                      </a>
-                      <button type="button" class="btn btn-danger ms-3">
+                      <button type="button" class="btn btn-primary" @click="editCategory({{$category}})">
+                        <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
+                      </button>  
+                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelCategory({{$category->id}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
@@ -112,6 +110,9 @@
   </div>
 </div>
 <modal-transition>
-  <modal-create-category v-if="showModalRegisterCategory" @cancel="cancelRegisterCategory"/>
+  <modal-create-category v-if="sModalRegisterCategory" :category-edit="selectedCategory" @cancel="showCreateCategory"/>
+</modal-transition>
+<modal-transition>
+  <modal-remove v-if="sModalRemove" @confirm="deleteCategory" @cancel="showModalRemove"/>  
 </modal-transition>
 @endsection

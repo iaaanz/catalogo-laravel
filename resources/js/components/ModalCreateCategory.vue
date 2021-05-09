@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title">Nova categoria</h3>
+          <h3 class="modal-title">{{ title }}</h3>
           <button type="button" class="btn-close" @click="onCancel" />
         </div>
         <div class="modal-body">
@@ -19,6 +19,7 @@
             <button
               class="btn btn-md text-white me-2"
               style="background-color: #00cd45; width: 110px"
+              :disabled="submitted"
               @click="onConfirm"
             >
               Salvar
@@ -51,15 +52,27 @@
 import axios from 'axios';
 
 export default {
+  props: {
+    categoryEdit: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
       category: null,
-
-      /**  TODO: Tratar no front quando a categoria for inválida
-       *    e qundo for sucesso para recarregar SOMENTE as categorias
-       *    e não toda a página.
-       */
+      categoryId: null,
+      submitted: false,
+      title: 'Nova categoria',
+      //  TODO: Tratar  quando a categoria for inválida
     };
+  },
+  mounted() {
+    if (this.categoryEdit != null) {
+      this.category = this.categoryEdit.category_name;
+      this.categoryId = this.categoryEdit.id;
+      this.title = 'Alterar categoria';
+    }
   },
   methods: {
     validateCategory(category) {
@@ -70,11 +83,27 @@ export default {
       return true;
     },
     onConfirm() {
+      this.submitted = true;
       if (!this.validateCategory(this.category)) {
         return false;
       }
 
-      axios
+      if (this.categoryId) {
+        return axios
+          .patch(`/v1/admin/categorias/edit/${this.categoryId}`, {
+            category: this.category,
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              location.reload();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      return axios
         .post('/v1/admin/categorias/create', {
           category: this.category,
         })

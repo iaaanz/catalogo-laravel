@@ -36,11 +36,27 @@ class CategoriesController extends Controller
   {
   }
 
-  public function update()
+  public function update(Request $request, $id)
   {
+    $category = Categories::find($id);
+    $category->category_name = $request->get('category');
+    $category->save();
+
+    session()->flash('success', 'Categoria alterada com sucesso!');
+    return response()->json([
+      'action' => 'Updated'
+    ]);
   }
 
-  public function delete()
+  public function delete($id)
   {
+    // TODO: Validar se existe item com essa categoria e tratar o retorno
+
+    Categories::destroy($id);
+
+    session()->flash('success', 'Categoria excluída com sucesso!');
+    return response()->json([
+      'action' => 'Deleted'
+    ]);
   }
 }

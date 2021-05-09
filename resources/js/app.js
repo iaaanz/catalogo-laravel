@@ -13,39 +13,62 @@ Vue.component('ModalRemove', require('./components/ModalRemove.vue').default);
 const vm = new Vue({
   el: '.app',
   data: {
-    showModalRemove: false,
-    showModalRegisterCategory: false,
-    selectProduct: null
+    sModalRemove: false,
+    sModalRegisterCategory: false,
+    selectedProduct: null,
+    selectedCategory: null
   },
   methods: {
+    // Show
+    showModalRemove() {
+      this.sModalRemove = !this.sModalRemove;
+    },
+    showCreateCategory() {
+      this.selectedCategory = null;
+      this.sModalRegisterCategory = !this.sModalRegisterCategory;
+    },
+
+    // Products
     confirmProduct(idProduto) {
-      this.showModalRemove = true;
-      this.selectProduct = idProduto;
+      this.showModalRemove();
+      this.selectedProduct = idProduto;
     },
     deleteProduct() {
       axios
-        .delete(`/v1/admin/produtos/delete/${this.selectProduct}`)
+        .delete(`/v1/admin/produtos/delete/${this.selectedProduct}`)
         .then(res => {
           location.reload();
         })
         .catch(err => {
           console.log(err);
         });
-      this.showModalRemove = false;
-      this.selectProduct = null;
+      this.showModalRemove();
+      this.selectedProduct = null;
     },
-    cancelDeleteProduct() {
-      this.showModalRemove = false;
-      this.selectProduct = null;
-    },
-    openCreateCategory() {
-      this.showModalRegisterCategory = true;
+
+    // Categories
+    confirmDelCategory(idCategory) {
+      this.showModalRemove();
+      this.selectedCategory = idCategory;
     },
     deleteCategory() {
-      // fazer
+      axios
+        .delete(`/v1/admin/categorias/delete/${this.selectedCategory}`)
+        .then(res => {
+          if (res.status === 200) {
+            console.log(res.status);
+            location.reload();
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.showModalRemove();
+      this.selectedProduct = null;
     },
-    cancelRegisterCategory() {
-      this.showModalRegisterCategory = false;
+    editCategory(category) {
+      this.showCreateCategory();
+      this.selectedCategory = category;
     }
   }
 });

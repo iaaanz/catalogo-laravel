@@ -80,6 +80,6 @@
   </div>
 </div>
 <modal-transition>
-  <modal-remove v-if="showModalRemove" :product="selectProduct" @confirm="deleteProduct" @cancel="cancelDeleteProduct"/>
+  <modal-remove v-if="sModalRemove" @confirm="deleteProduct" @cancel="showModalRemove"/>
 <modal-transition>
 @endsection
