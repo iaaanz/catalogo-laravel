@@ -24,6 +24,11 @@
       {{ session('success') }}
     </div>
     @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+      {{ session('error') }}
+    </div>
+    @endif
     <div class="row">
       <div class="col-sm-6">
         <div class="white-box">
@@ -48,7 +53,7 @@
                 @foreach ($categories as $category)
                 <tr>
                   <td>{{ $category->id }}</td>
-                  <td>{{ $category->category_name }}</td>
+                  <td>{{ $category->name }}</td>
                   <td>
                     <span class="d-flex justify-content-end">
                       <button type="button" class="btn btn-primary" @click="editCategory({{$category}})">
@@ -63,6 +68,7 @@
                 @endforeach
               </tbody>
             </table>
+            {{ $categories->links() }}
           </div>
         </div>
       </div>
@@ -70,8 +76,9 @@
         <div class="white-box">
           <div class="d-flex justify-content-between">
             <h3 class="box-title">Subcategorias</h3>
-            <a class="text-white" href="">
-              <button class="btn btn-success text-white me-3">Cadastrar
+            <a class="text-white">
+              <button class="btn btn-success text-white me-3"
+              @click="showCreateSubcategory">Cadastrar
               </button>
             </a>
           </div>
@@ -81,28 +88,32 @@
                 <tr>
                   <th class="col">#</th>
                   <th class="col">Nome</th>
+                  <th class="col">Cat. Principal</th>
+                  <th class="col">Itens Associados</th>
                   <th class="col-1">Ação</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($subcategories as $subcategory)
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>{{ $subcategory->id }}</td>
+                  <td>{{ $subcategory->name }}</td>
+                  <td>{{ $subcategory->category_id}}</td>
                   <td>
                     <span class="d-flex justify-content-end">
-                      <a href="">
-                        <button type="button" class="btn btn-primary">
-                          <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
-                        </button>  
-                      </a>
-                      <button type="button" class="btn btn-danger ms-3">
+                      <button type="button" class="btn btn-primary" @click="editCategory({{$subcategory}})">
+                        <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
+                      </button>  
+                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelCategory({{$subcategory->id}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
                   </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
+            {{ $subcategories->links() }}
           </div>
         </div>
       </div>
@@ -110,7 +121,10 @@
   </div>
 </div>
 <modal-transition>
-  <modal-create-category v-if="sModalRegisterCategory" :category-edit="selectedCategory" @cancel="showCreateCategory"/>
+  <modal-create-category v-if="sModalCreateCategory" :category-edit="selectedCategory" @cancel="showCreateCategory"/>
+</modal-transition>
+<modal-transition>
+  <modal-create-subcategory v-if="sModalCreateSubcategory" :subcategory-edit="selectedSubcategory" @cancel="showCreateSubcategory"/>
 </modal-transition>
 <modal-transition>
   <modal-remove v-if="sModalRemove" @confirm="deleteCategory" @cancel="showModalRemove"/>  

@@ -38,11 +38,12 @@
             <table class="table text-nowrap">
               <thead>
                 <tr>
-                  <th class="col">#</th>
+                  <th class="col-1">#</th>
                   <th class="col">Item</th>
-                  <th class="col">Preço</th>
-                  <th class="col">Qtd</th>
-                  <th class="col-3">Unidade de medida</th>
+                  <th class="col-1">Preço</th>
+                  <th class="col-1">Qtd</th>
+                  <th class="col-1">Unidade de medida</th>
+                  <th class="col-2">Categoria</th>
                   <th class="col-1">Status</th>
                   <th class="col-1">Ação</th>
                 </tr>
@@ -55,6 +56,7 @@
                   <td>R$ {{$product->price_per_unit}}</td>
                   <td>{{$product->in_stock}}</td>
                   <td>{{$product->basic_unit}}</td>
+                  <td>{{$product->name}}</td>
                   <td>{{$product->active_for_sale}}</td>
                   <td>
                     <span class="d-flex justify-content-around">

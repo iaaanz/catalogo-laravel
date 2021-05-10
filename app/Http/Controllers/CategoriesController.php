@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use App\Subcategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
 
   public function index()
   {
-    $categories = Categories::orderBy('id')->paginate(10);
-
-    return view('admin.categories_index', compact('categories'));
-  }
-
-  public function create()
-  {
+    $categories = Categories::orderBy('id')->paginate(5, ['*'], 'categories');
+    $subcategories = Subcategories::orderBy('id')->paginate(5, ['*'], 'subcategories');
+    return view('admin.categories_index', compact('categories', 'subcategories'));
   }
 
   // TODO: fazer request que valida depois : )
@@ -24,22 +22,19 @@ class CategoriesController extends Controller
   {
 
     $category = new Categories([
-      'category_name' => $request->get('category')
+      'name' => $request->get('category')
     ]);
 
     $category->save();
 
+    session()->flash('success', 'Categoria cadastrada com sucesso!');
     return response()->json(["category" => $request->get('category')]);
-  }
-
-  public function edit()
-  {
   }
 
   public function update(Request $request, $id)
   {
     $category = Categories::find($id);
-    $category->category_name = $request->get('category');
+    $category->name = $request->get('category');
     $category->save();
 
     session()->flash('success', 'Categoria alterada com sucesso!');
@@ -50,7 +45,17 @@ class CategoriesController extends Controller
 
   public function delete($id)
   {
-    // TODO: Validar se existe item com essa categoria e tratar o retorno
+    $category = Categories::find($id);
+    $rs = ['product'];
+
+    foreach ($rs as $r) {
+      if ($category->$r->count() > 0) {
+        session()->flash('error', 'A categoria possui vínculo com algum produto, remova a categoria do item para conseguir excluí-la');
+        return response()->json([
+          'error' => 'Categoria com vínculo em algum produto'
+        ]);
+      }
+    }
 
     Categories::destroy($id);
 

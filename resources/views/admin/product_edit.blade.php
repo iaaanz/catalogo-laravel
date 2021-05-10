@@ -65,19 +65,20 @@
                 <label for="limited">Limitado</label>
                 <select id="limited" class="form-control" name="limited">
                   @if ($product->limited=='Sim')
-                  <option selected>Sim</option>
-                  <option>Não</option>
+                    <option selected>Sim</option>
+                    <option>Não</option>
                   @else
-                  <option>Sim</option>
-                  <option selected>Não</option>
+                    <option>Sim</option>
+                    <option selected>Não</option>
                   @endif
                 </select>
               </div>
               <div class="form-group col-md-2">
                 <label for="category">Categoria</label>
                 <select id="category" class="form-control" name="category">
-                  <option>1</option>
-                  <option selected>2</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id === $product->category_id ? 'selected' : ''}}>{{ $category->name }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="form-group col-md-1">

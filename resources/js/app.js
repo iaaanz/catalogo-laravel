@@ -8,15 +8,18 @@ window.Vue = require('vue');
 
 Vue.component('ModalTransition', require('./transitions/ModalTransition.vue').default);
 Vue.component('ModalCreateCategory', require('./components/ModalCreateCategory.vue').default);
+Vue.component('ModalCreateSubcategory', require('./components/ModalCreateSubcategory.vue').default);
 Vue.component('ModalRemove', require('./components/ModalRemove.vue').default);
 
 const vm = new Vue({
   el: '.app',
   data: {
     sModalRemove: false,
-    sModalRegisterCategory: false,
+    sModalCreateCategory: false,
+    sModalCreateSubcategory: false,
     selectedProduct: null,
-    selectedCategory: null
+    selectedCategory: null,
+    selectedSubcategory: null
   },
   methods: {
     // Show
@@ -25,9 +28,14 @@ const vm = new Vue({
     },
     showCreateCategory() {
       this.selectedCategory = null;
-      this.sModalRegisterCategory = !this.sModalRegisterCategory;
+      this.selectedSubcategory = null;
+      this.sModalCreateCategory = !this.sModalCreateCategory;
     },
-
+    showCreateSubcategory() {
+      this.selectedCategory = null;
+      this.selectedSubcategory = null;
+      this.sModalCreateSubcategory = !this.sModalCreateSubcategory;
+    },
     // Products
     confirmProduct(idProduto) {
       this.showModalRemove();
@@ -69,6 +77,12 @@ const vm = new Vue({
     editCategory(category) {
       this.showCreateCategory();
       this.selectedCategory = category;
+    },
+
+    // Subcategories
+    confirmDelSubcategory(idSubcategory) {
+      this.showModalRemove();
+      this.selectedSubcategory = idSubcategory;
     }
   }
 });

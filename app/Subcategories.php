@@ -4,16 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Subcategories extends Model
 {
   protected $fillable = [
+    'category_id',
+    'product_id',
     'name'
   ];
 
   public $timestamps = false;
 
-  public function product()
-  {
-    return $this->hasMany(Products::class, 'category_id');
-  }
+  // TODO: estudar pra ver como vai funcionar a associação aqui
 }

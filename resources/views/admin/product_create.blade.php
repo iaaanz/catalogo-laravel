@@ -70,8 +70,9 @@
               <div class="form-group col-md-2">
                 <label for="category">Categoria</label>
                 <select id="category" class="form-control" name="category">
-                  <option>1</option>
-                  <option selected>2</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="form-group col-md-1">

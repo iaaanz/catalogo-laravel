@@ -10,7 +10,16 @@
           <div class="category">
             <div class="row">
               <div class="col">
-                <input ref="category" v-model="category" type="text" class="form-control" />
+                <select id="category" v-model="selected" class="form-control" name="category">
+                  <option v-for="category in categories" :key="category.id" :value="category.id">
+                    {{ category.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col">
+                <input ref="subcategory" v-model="subcategory" type="text" class="form-control" />
               </div>
               <!-- <span v-if="msg">{{ msg }}</span> -->
             </div>
@@ -37,61 +46,57 @@
     </div>
   </div>
 </template>
-
-  <!--
-    Old input, send to app.js:
-
-    <input
-    ref="category"
-    type="text"
-    class="form-control"
-    @input="$emit('send', $event.target.value)"
-  /> -->
-
 <script>
 import axios from 'axios';
 
 export default {
   props: {
-    categoryEdit: {
+    subcategoryEdit: {
       type: Object,
       default: null,
     },
   },
   data() {
     return {
-      category: null,
-      categoryId: null,
+      selected: null,
+      categories: null,
+      subcategory: null,
+      subcategoryId: null,
       submitted: false,
-      title: 'Nova categoria',
-      //  TODO: Tratar  quando a categoria for inválida
+      title: 'Nova subcategoria',
+
+      //  TODO: Tratar  quando a subcategoria for inválida
     };
   },
   mounted() {
-    if (this.categoryEdit != null) {
-      this.category = this.categoryEdit.name;
-      this.categoryId = this.categoryEdit.id;
-      this.title = 'Alterar categoria';
+    if (this.subcategoryEdit != null) {
+      this.subcategory = this.subcategoryEdit.name;
+      this.subcategoryId = this.subcategoryEdit.id;
+      this.title = 'Alterar subcategoria';
     }
+
+    // TODO: Fazer GET aqui dentro para pegar as categorias disponíveis porra :)
+
+    console.log('montado');
   },
   methods: {
-    validateCategory(category) {
-      if (!category) {
-        this.$refs.category.focus();
+    validateCategory(subcategory) {
+      if (!subcategory) {
+        this.$refs.subcategory.focus();
         return false;
       }
       return true;
     },
     onConfirm() {
       this.submitted = true;
-      if (!this.validateCategory(this.category)) {
+      if (!this.validateCategory(this.subcategory)) {
         return false;
       }
 
-      if (this.categoryId) {
+      if (this.subcategoryId) {
         return axios
-          .patch(`/v1/admin/categorias/edit/${this.categoryId}`, {
-            category: this.category,
+          .patch(`/v1/admin/subcategorias/edit/${this.subcategoryId}`, {
+            subcategory: this.subcategory,
           })
           .then((res) => {
             if (res.status === 200) {
@@ -104,8 +109,8 @@ export default {
       }
 
       return axios
-        .post('/v1/admin/categorias/create', {
-          category: this.category,
+        .post('/v1/admin/subcategorias/create', {
+          subcategory: this.subcategory,
         })
         .then((res) => {
           if (res.status === 200) {

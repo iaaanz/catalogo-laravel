@@ -4,23 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItemRegistration;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\ProductImage;
 use App\Products;
+use App\Categories;
 
 class ProductController extends Controller
 {
 
   public function index()
   {
-    $products = Products::orderBy('id')->paginate(10);
+    // $products = Products::orderBy('id')->paginate(10);
+
+    $products = DB::table('products')
+      ->join('categories', 'products.category_id', '=', 'categories.id')
+      ->select('products.*', 'categories.name')
+      ->paginate(10);
 
     return view('admin.product_index', compact('products'));
   }
 
   public function create()
   {
-    return view('admin.product_create');
+    $categories = Categories::all();
+    return view('admin.product_create', compact('categories'));
   }
 
   public function store(StoreItemRegistration $request)
@@ -43,6 +51,8 @@ class ProductController extends Controller
     } else {
       $product->active_for_sale = 'Ativo';
     }
+
+    $product->category()->associate($product->category_id);
     $product->save();
 
     if ($request->hasFile('product_image')) {
@@ -63,8 +73,8 @@ class ProductController extends Controller
   public function edit($id)
   {
     $product = Products::find($id);
-
-    return view('admin.product_edit', compact('product'));
+    $categories = Categories::all();
+    return view('admin.product_edit', compact('product', 'categories'));
   }
 
   public function update(StoreItemRegistration $request, $id)
