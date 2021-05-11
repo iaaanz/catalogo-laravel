@@ -7,6 +7,9 @@
           <button type="button" class="btn-close" @click="onCancel" />
         </div>
         <div class="modal-body">
+          <div v-if="loading" class="d-flex justify-content-center m-3">
+            <div class="spinner-border" role="status"></div>
+          </div>
           <div class="category">
             <div class="row">
               <div class="col">
@@ -68,27 +71,37 @@ export default {
       //  TODO: Tratar  quando a subcategoria for inválida
     };
   },
+  watch: {
+    // call again the method if the route changes
+    $route: 'fetchData',
+  },
+  created() {
+    this.fetchData();
+  },
   mounted() {
     if (this.subcategoryEdit != null) {
       this.subcategory = this.subcategoryEdit.name;
       this.subcategoryId = this.subcategoryEdit.id;
+      this.selected = this.subcategoryEdit.catId;
       this.title = 'Alterar subcategoria';
     }
-
-    axios
-      .get('/v1/admin/categorias/all')
-      .then((res) => {
-        console.log(res.data);
-        this.categories = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // TODO: Fazer GET aqui dentro para pegar as categorias disponíveis porra :)
 
     console.log('montado');
   },
   methods: {
+    fetchData() {
+      this.loading = true;
+      axios
+        .get('/v1/admin/categorias/all')
+        .then((res) => {
+          console.log(res.data);
+          this.loading = false;
+          this.categories = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     validateCategory(subcategory) {
       if (!subcategory) {
         this.$refs.subcategory.focus();
@@ -106,6 +119,7 @@ export default {
         return axios
           .patch(`/v1/admin/subcategorias/edit/${this.subcategoryId}`, {
             subcategory: this.subcategory,
+            category_id: this.selected,
           })
           .then((res) => {
             if (res.status === 200) {

@@ -37,6 +37,12 @@
 
 <script>
 export default {
+  props: {
+    subMode: {
+      type: Boolean,
+      default: null,
+    },
+  },
   methods: {
     onConfirm() {
       this.$emit('confirm');

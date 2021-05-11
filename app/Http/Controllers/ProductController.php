@@ -52,7 +52,6 @@ class ProductController extends Controller
       $product->active_for_sale = 'Ativo';
     }
 
-    $product->category()->associate($product->category_id);
     $product->save();
 
     if ($request->hasFile('product_image')) {

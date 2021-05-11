@@ -12,20 +12,22 @@ class CategoriesController extends Controller
 
   public function allCategories()
   {
-    return $categories = Categories::all();
+    return Categories::all();
   }
 
   public function index()
   {
-    $categories = Categories::orderBy('id')->paginate(5, ['*'], 'categories');
+    $categories = Categories::orderBy('id')->paginate(10, ['*'], 'categories');
 
     $subcategories = DB::table('subcategories')
       ->join('categories', 'subcategories.category_id', '=', 'categories.id')
-      ->select('subcategories.*', 'categories.name as catName')
-      ->paginate(5);
+      ->select(
+        'subcategories.*',
+        'categories.name as catName',
+        'categories.id as catId'
+      )
+      ->paginate(10, ['*'], 'subcategories');
 
-    // $subcategories = Subcategories::orderBy('id')->paginate(5, ['*'], 'subcategories');
-    // dd($subcategories);
     return view('admin.categories_index', ['categories' => $categories, 'subcategories' => $subcategories]);
   }
 
@@ -58,13 +60,13 @@ class CategoriesController extends Controller
   public function delete($id)
   {
     $category = Categories::find($id);
-    $rs = ['product'];
+    $rs = ['subcategory'];
 
     foreach ($rs as $r) {
       if ($category->$r->count() > 0) {
-        session()->flash('error', 'A categoria possui vínculo com algum produto, remova a categoria do item para conseguir excluí-la');
+        session()->flash('error', 'A categoria possui vínculo com alguma subcategoria, remova a associação para conseguir excluí-la');
         return response()->json([
-          'error' => 'Categoria com vínculo em algum produto'
+          'error' => 'Categoria com vínculo em alguma subcategoria'
         ]);
       }
     }

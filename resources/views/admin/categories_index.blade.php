@@ -68,7 +68,7 @@
                 @endforeach
               </tbody>
             </table>
-            {{ $categories->links() }}
+            {{ $categories->appends(array_except(Request::query(), 'categories'))->links() }}
           </div>
         </div>
       </div>
@@ -96,15 +96,16 @@
               <tbody>
                 @foreach ($subcategories as $subcategory)
                 <tr>
-                  <td>{{ $subcategory }}</td>
-                  {{-- <td>{{ $subcategory->name }}</td>
-                  <td>{{ $subcategory->catName}}</td> --}}
+                  <td>{{ $subcategory->id }}</td>
+                  <td>{{ $subcategory->name }}</td>
+                  <td>{{ $subcategory->catName}}</td>
+                  <td> 3239 </td>
                   <td>
                     <span class="d-flex justify-content-end">
-                      <button type="button" class="btn btn-primary" @click="editCategory({{$subcategory}})">
+                      <button type="button" class="btn btn-primary" @click="editSubcategory({{json_encode($subcategory)}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
                       </button>  
-                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelCategory({{$subcategory->id}})">
+                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelSubcategory({{json_encode($subcategory->id)}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
@@ -113,7 +114,7 @@
                 @endforeach
               </tbody>
             </table>
-            {{-- {{ $subcategories->links() }} --}}
+            {{ $subcategories->appends(array_except(Request::query(), 'subcategories'))->links() }}
           </div>
         </div>
       </div>
@@ -127,6 +128,8 @@
   <modal-create-subcategory v-if="sModalCreateSubcategory" :subcategory-edit="selectedSubcategory" @cancel="showCreateSubcategory"/>
 </modal-transition>
 <modal-transition>
-  <modal-remove v-if="sModalRemove" @confirm="deleteCategory" @cancel="showModalRemove"/>  
+  {{-- TODO: Alterar o @confirm para dentro do componente, pois sera o mesmo modal
+     para todas as exclusões, alterar no app.js também --}}
+  <modal-remove v-if="sModalRemove" :sub-mode="subMode" //Tirar_daqui@confirm="deleteCategory"// @cancel="showModalRemove"/>  
 </modal-transition>
 @endsection

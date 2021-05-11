@@ -19,7 +19,8 @@ const vm = new Vue({
     sModalCreateSubcategory: false,
     selectedProduct: null,
     selectedCategory: null,
-    selectedSubcategory: null
+    selectedSubcategory: null,
+    subMode: null
   },
   methods: {
     // Show
@@ -58,6 +59,7 @@ const vm = new Vue({
     // Categories
     confirmDelCategory(idCategory) {
       this.showModalRemove();
+      this.subMode = false;
       this.selectedCategory = idCategory;
     },
     deleteCategory() {
@@ -73,7 +75,6 @@ const vm = new Vue({
           console.log(err);
         });
       this.showModalRemove();
-      this.selectedProduct = null;
     },
     editCategory(category) {
       this.showCreateCategory();
@@ -83,7 +84,26 @@ const vm = new Vue({
     // Subcategories
     confirmDelSubcategory(idSubcategory) {
       this.showModalRemove();
+      this.subMode = true;
       this.selectedSubcategory = idSubcategory;
+    },
+    deleteSubcategory() {
+      axios
+        .delete(`/v1/admin/subcategorias/delete/${this.selectedSubcategory}`)
+        .then(res => {
+          if (res.status === 200) {
+            console.log(res.status);
+            location.reload();
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.showModalRemove();
+    },
+    editSubcategory(subcategory) {
+      this.showCreateSubcategory();
+      this.selectedSubcategory = subcategory;
     }
   }
 });

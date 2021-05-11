@@ -15,4 +15,9 @@ class Subcategories extends Model
   public $timestamps = false;
 
   // TODO: estudar pra ver como vai funcionar a associação aqui
+
+  public function category()
+  {
+    return $this->belongsTo(Categories::class);
+  }
 }
