@@ -96,9 +96,9 @@
               <tbody>
                 @foreach ($subcategories as $subcategory)
                 <tr>
-                  <td>{{ $subcategory->id }}</td>
-                  <td>{{ $subcategory->name }}</td>
-                  <td>{{ $subcategory->category_id}}</td>
+                  <td>{{ $subcategory }}</td>
+                  {{-- <td>{{ $subcategory->name }}</td>
+                  <td>{{ $subcategory->catName}}</td> --}}
                   <td>
                     <span class="d-flex justify-content-end">
                       <button type="button" class="btn btn-primary" @click="editCategory({{$subcategory}})">
@@ -113,7 +113,7 @@
                 @endforeach
               </tbody>
             </table>
-            {{ $subcategories->links() }}
+            {{-- {{ $subcategories->links() }} --}}
           </div>
         </div>
       </div>

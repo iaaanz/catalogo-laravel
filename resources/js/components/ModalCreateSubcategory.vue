@@ -75,6 +75,15 @@ export default {
       this.title = 'Alterar subcategoria';
     }
 
+    axios
+      .get('/v1/admin/categorias/all')
+      .then((res) => {
+        console.log(res.data);
+        this.categories = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // TODO: Fazer GET aqui dentro para pegar as categorias disponíveis porra :)
 
     console.log('montado');
@@ -111,6 +120,7 @@ export default {
       return axios
         .post('/v1/admin/subcategorias/create', {
           subcategory: this.subcategory,
+          category_id: this.selected,
         })
         .then((res) => {
           if (res.status === 200) {

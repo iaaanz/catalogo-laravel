@@ -10,11 +10,23 @@ use Illuminate\Support\Facades\DB;
 class CategoriesController extends Controller
 {
 
+  public function allCategories()
+  {
+    return $categories = Categories::all();
+  }
+
   public function index()
   {
     $categories = Categories::orderBy('id')->paginate(5, ['*'], 'categories');
-    $subcategories = Subcategories::orderBy('id')->paginate(5, ['*'], 'subcategories');
-    return view('admin.categories_index', compact('categories', 'subcategories'));
+
+    $subcategories = DB::table('subcategories')
+      ->join('categories', 'subcategories.category_id', '=', 'categories.id')
+      ->select('subcategories.*', 'categories.name as catName')
+      ->paginate(5);
+
+    // $subcategories = Subcategories::orderBy('id')->paginate(5, ['*'], 'subcategories');
+    // dd($subcategories);
+    return view('admin.categories_index', ['categories' => $categories, 'subcategories' => $subcategories]);
   }
 
   // TODO: fazer request que valida depois : )

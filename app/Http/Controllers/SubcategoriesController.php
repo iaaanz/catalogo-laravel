@@ -14,7 +14,8 @@ class SubcategoriesController extends Controller
    */
   public function index()
   {
-    //
+    $subcategories = Subcategories::all();
+    dd($subcategories);
   }
 
   /**
@@ -36,7 +37,8 @@ class SubcategoriesController extends Controller
   public function store(Request $request)
   {
     $subcategory = new Subcategories([
-      'name' => $request->get('subcategory')
+      'name' => $request->get('subcategory'),
+      'category_id' => $request->get('category_id')
     ]);
 
     $subcategory->save();

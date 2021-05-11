@@ -36,6 +36,7 @@ const vm = new Vue({
       this.selectedSubcategory = null;
       this.sModalCreateSubcategory = !this.sModalCreateSubcategory;
     },
+
     // Products
     confirmProduct(idProduto) {
       this.showModalRemove();

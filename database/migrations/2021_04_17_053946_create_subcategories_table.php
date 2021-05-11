@@ -16,8 +16,8 @@ class CreateSubcategoriesTable extends Migration
     Schema::create('subcategories', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('category_id');
-      $table->unsignedBigInteger('product_id');
       $table->string('name');
+      // $table->unsignedBigInteger('product_id'); a categoria que vair ir no item, e não o item na categoria
 
       $table->foreign('category_id')
         ->references('id')

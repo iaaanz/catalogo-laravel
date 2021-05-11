@@ -41,10 +41,11 @@ Route::prefix('/v1')->group(function () {
     Route::post('/categorias/create', 'CategoriesController@store')->name('admin.categories,store');
     Route::patch('/categorias/edit/{id}', 'CategoriesController@update')->name('admin.categories.update');
     Route::delete('/categorias/delete/{id}', 'CategoriesController@delete')->name('admin.categories.delete');
+    Route::get('/categorias/all', 'CategoriesController@allCategories')->name('admin.categories.all');
 
     //SubcategoriesController
-    // Route::get('/categorias', 'CategoriesController@index')->name('admin.categories.index');
-    Route::post('/subcategorias/create', 'SubcategoriesController@store')->name('admin.subcategories,store');
+    Route::get('/subcategorias', 'SubcategoriesController@index')->name('admin.subcategories.index');
+    Route::post('/subcategorias/create', 'SubcategoriesController@store')->name('admin.subcategories.store');
     Route::patch('/subcategorias/edit/{id}', 'SubcategoriesController@update')->name('admin.subcategories.update');
     Route::delete('/subcategorias/delete/{id}', 'SubcategoriesController@delete')->name('admin.subcategories.delete');
   });

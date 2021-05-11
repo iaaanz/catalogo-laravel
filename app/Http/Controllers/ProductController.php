@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     $products = DB::table('products')
       ->join('categories', 'products.category_id', '=', 'categories.id')
-      ->select('products.*', 'categories.name')
+      ->select('products.*', 'categories.name as catName')
       ->paginate(10);
 
     return view('admin.product_index', compact('products'));

@@ -56,7 +56,7 @@
                   <td>R$ {{$product->price_per_unit}}</td>
                   <td>{{$product->in_stock}}</td>
                   <td>{{$product->basic_unit}}</td>
-                  <td>{{$product->name}}</td>
+                  <td>{{$product->catName}}</td>
                   <td>{{$product->active_for_sale}}</td>
                   <td>
                     <span class="d-flex justify-content-around">
