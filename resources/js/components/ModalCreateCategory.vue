@@ -85,6 +85,7 @@ export default {
     onConfirm() {
       this.submitted = true;
       if (!this.validateCategory(this.category)) {
+        this.submitted = false;
         return false;
       }
 
