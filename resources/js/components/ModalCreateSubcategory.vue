@@ -13,7 +13,14 @@
           <div class="category">
             <div class="row">
               <div class="col">
-                <select id="category" v-model="selected" class="form-control" name="category">
+                <select
+                  id="category"
+                  ref="category"
+                  v-model="catSelected"
+                  class="form-control"
+                  name="category"
+                >
+                  <option value="null" disabled selected hidden>Categoria</option>
                   <option v-for="category in categories" :key="category.id" :value="category.id">
                     {{ category.name }}
                   </option>
@@ -24,7 +31,6 @@
               <div class="col">
                 <input ref="subcategory" v-model="subcategory" type="text" class="form-control" />
               </div>
-              <!-- <span v-if="msg">{{ msg }}</span> -->
             </div>
           </div>
           <div class="text-end pt-3">
@@ -61,7 +67,7 @@ export default {
   },
   data() {
     return {
-      selected: null,
+      catSelected: null,
       categories: null,
       subcategory: null,
       subcategoryId: null,
@@ -82,11 +88,9 @@ export default {
     if (this.subcategoryEdit != null) {
       this.subcategory = this.subcategoryEdit.name;
       this.subcategoryId = this.subcategoryEdit.id;
-      this.selected = this.subcategoryEdit.catId;
+      this.catSelected = this.subcategoryEdit.catId;
       this.title = 'Alterar subcategoria';
     }
-
-    console.log('montado');
   },
   methods: {
     fetchData() {
@@ -102,16 +106,17 @@ export default {
           console.log(err);
         });
     },
-    validateCategory(subcategory) {
-      if (!subcategory) {
-        this.$refs.subcategory.focus();
-        return false;
-      }
-      return true;
-    },
     onConfirm() {
       this.submitted = true;
-      if (!this.validateCategory(this.subcategory)) {
+
+      if (!this.catSelected) {
+        this.$refs.category.focus();
+        this.submitted = false;
+        return false;
+      }
+
+      if (!this.subcategory) {
+        this.$refs.subcategory.focus();
         this.submitted = false;
         return false;
       }
@@ -120,7 +125,7 @@ export default {
         return axios
           .patch(`/v1/admin/subcategorias/edit/${this.subcategoryId}`, {
             subcategory: this.subcategory,
-            category_id: this.selected,
+            category_id: this.catSelected,
           })
           .then((res) => {
             if (res.status === 200) {
@@ -135,7 +140,7 @@ export default {
       return axios
         .post('/v1/admin/subcategorias/create', {
           subcategory: this.subcategory,
-          category_id: this.selected,
+          category_id: this.catSelected,
         })
         .then((res) => {
           if (res.status === 200) {

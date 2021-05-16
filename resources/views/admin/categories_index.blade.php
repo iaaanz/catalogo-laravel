@@ -77,8 +77,7 @@
           <div class="d-flex justify-content-between">
             <h3 class="box-title">Subcategorias</h3>
             <a class="text-white">
-              <button class="btn btn-success text-white me-3"
-              @click="showCreateSubcategory">Cadastrar
+              <button class="btn btn-success text-white me-3" @click="showCreateSubcategory">Cadastrar
               </button>
             </a>
           </div>
