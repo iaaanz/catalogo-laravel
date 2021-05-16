@@ -43,7 +43,7 @@
                   <th class="col-1">Preço</th>
                   <th class="col-1">Qtd</th>
                   <th class="col-1">Unidade de medida</th>
-                  <th class="col-2">Categoria</th>
+                  <th class="col-2">Subcategoria</th>
                   <th class="col-1">Status</th>
                   <th class="col-1">Ação</th>
                 </tr>
@@ -56,7 +56,7 @@
                   <td>R$ {{$product->price_per_unit}}</td>
                   <td>{{$product->in_stock}}</td>
                   <td>{{$product->basic_unit}}</td>
-                  <td>{{$product->catName}}</td>
+                  <td>{{$product->subcatName}}</td>
                   <td>{{$product->active_for_sale}}</td>
                   <td>
                     <span class="d-flex justify-content-around">
@@ -65,7 +65,7 @@
                           <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
                         </button>  
                       </a>
-                      <button type="button" class="btn btn-danger" @click="confirmProduct({{$product->id}})">
+                      <button type="button" class="btn btn-danger" @click="deleteId({{$product->id}}, 'prod')">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
@@ -82,6 +82,6 @@
   </div>
 </div>
 <modal-transition>
-  <modal-remove v-if="sModalRemove" @confirm="deleteProduct" @cancel="showModalRemove"/>
+  <modal-remove v-if="sModalRemove" :del-item="delObj" @cancel="showModalRemove"/>  
 <modal-transition>
 @endsection

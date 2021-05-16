@@ -36,16 +36,69 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
-    subMode: {
-      type: Boolean,
+    delItem: {
+      type: Object,
       default: null,
     },
   },
+  mounted() {
+    if (this.delItem === null) {
+      console.log('Algo errado no ModalRemove, nenhum objeto trazido');
+    }
+  },
   methods: {
+    delCat(id) {
+      axios
+        .delete(`/v1/admin/categorias/delete/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    delSubcat(id) {
+      axios
+        .delete(`/v1/admin/subcategorias/delete/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    delProd(id) {
+      axios
+        .delete(`/v1/admin/produtos/delete/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     onConfirm() {
-      this.$emit('confirm');
+      const { mode, id } = this.delItem;
+      if (mode === 'cat') {
+        this.delCat(id);
+      } else if (mode === 'subCat') {
+        this.delSubcat(id);
+      } else if (mode === 'prod') {
+        this.delProd(id);
+      } else {
+        console.log('Erro: ModalRemove.vue(onConfirm)');
+      }
+      this.$emit('cancel');
     },
     onCancel() {
       this.$emit('cancel');

@@ -59,7 +59,7 @@
                       <button type="button" class="btn btn-primary" @click="editCategory({{$category}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
                       </button>  
-                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelCategory({{$category->id}})">
+                      <button type="button" class="btn btn-danger ms-3" @click="deleteId({{$category->id}}, 'cat')">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
@@ -105,7 +105,7 @@
                       <button type="button" class="btn btn-primary" @click="editSubcategory({{json_encode($subcategory)}})">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-edit"></i>
                       </button>  
-                      <button type="button" class="btn btn-danger ms-3" @click="confirmDelSubcategory({{json_encode($subcategory->id)}})">
+                      <button type="button" class="btn btn-danger ms-3" @click="deleteId({{json_encode($subcategory->id)}}, 'subCat')">
                         <i style="font-size: 1.2rem;" class="text-white fas fa-times fa-2x"></i>
                       </button>
                     </span>
@@ -128,8 +128,6 @@
   <modal-create-subcategory v-if="sModalCreateSubcategory" :subcategory-edit="selectedSubcategory" @cancel="showCreateSubcategory"/>
 </modal-transition>
 <modal-transition>
-  {{-- TODO: Alterar o @confirm para dentro do componente, pois sera o mesmo modal
-     para todas as exclusões, alterar no app.js também --}}
-  <modal-remove v-if="sModalRemove" :sub-mode="subMode" //Tirar_daqui@confirm="deleteCategory"// @cancel="showModalRemove"/>  
+  <modal-remove v-if="sModalRemove" :del-item="delObj" @cancel="showModalRemove"/>  
 </modal-transition>
 @endsection

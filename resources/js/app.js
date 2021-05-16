@@ -20,11 +20,12 @@ const vm = new Vue({
     selectedProduct: null,
     selectedCategory: null,
     selectedSubcategory: null,
-    subMode: null
+    delObj: null
   },
   methods: {
     // Show
     showModalRemove() {
+      this.delObj = null;
       this.sModalRemove = !this.sModalRemove;
     },
     showCreateCategory() {
@@ -38,69 +39,22 @@ const vm = new Vue({
       this.sModalCreateSubcategory = !this.sModalCreateSubcategory;
     },
 
-    // Products
-    confirmProduct(idProduto) {
+    // Delete modal
+    deleteId(id, mode) {
       this.showModalRemove();
-      this.selectedProduct = idProduto;
-    },
-    deleteProduct() {
-      axios
-        .delete(`/v1/admin/produtos/delete/${this.selectedProduct}`)
-        .then(res => {
-          location.reload();
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      this.showModalRemove();
-      this.selectedProduct = null;
+      this.delObj = {
+        id: id,
+        mode: mode
+      };
     },
 
     // Categories
-    confirmDelCategory(idCategory) {
-      this.showModalRemove();
-      this.subMode = false;
-      this.selectedCategory = idCategory;
-    },
-    deleteCategory() {
-      axios
-        .delete(`/v1/admin/categorias/delete/${this.selectedCategory}`)
-        .then(res => {
-          if (res.status === 200) {
-            console.log(res.status);
-            location.reload();
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      this.showModalRemove();
-    },
     editCategory(category) {
       this.showCreateCategory();
       this.selectedCategory = category;
     },
 
     // Subcategories
-    confirmDelSubcategory(idSubcategory) {
-      this.showModalRemove();
-      this.subMode = true;
-      this.selectedSubcategory = idSubcategory;
-    },
-    deleteSubcategory() {
-      axios
-        .delete(`/v1/admin/subcategorias/delete/${this.selectedSubcategory}`)
-        .then(res => {
-          if (res.status === 200) {
-            console.log(res.status);
-            location.reload();
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      this.showModalRemove();
-    },
     editSubcategory(subcategory) {
       this.showCreateSubcategory();
       this.selectedSubcategory = subcategory;

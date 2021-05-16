@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
   {
     Schema::create('products', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('category_id');
+      $table->unsignedBigInteger('subcategory_id');
       $table->string('name');
       $table->string('description');
       $table->decimal('price_per_unit', 8, 2);
@@ -26,9 +26,9 @@ class CreateProductsTable extends Migration
       $table->timestamp('created_at')->nullable();
       $table->timestamp('updated_at')->nullable();
 
-      $table->foreign('category_id')
+      $table->foreign('subcategory_id')
         ->references('id')
-        ->on('categories');
+        ->on('subcategories');
     });
   }
 

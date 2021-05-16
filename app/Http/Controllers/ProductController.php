@@ -8,18 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\ProductImage;
 use App\Products;
-use App\Categories;
+use App\Subcategories;
 
 class ProductController extends Controller
 {
 
   public function index()
   {
-    // $products = Products::orderBy('id')->paginate(10);
-
     $products = DB::table('products')
-      ->join('categories', 'products.category_id', '=', 'categories.id')
-      ->select('products.*', 'categories.name as catName')
+      ->join('subcategories', 'products.subcategory_id', '=', 'subcategories.id')
+      ->select('products.*', 'subcategories.name as subcatName')
       ->paginate(10);
 
     return view('admin.product_index', compact('products'));
@@ -27,8 +25,8 @@ class ProductController extends Controller
 
   public function create()
   {
-    $categories = Categories::all();
-    return view('admin.product_create', compact('categories'));
+    $subcategories = Subcategories::all();
+    return view('admin.product_create', compact('subcategories'));
   }
 
   public function store(StoreItemRegistration $request)
@@ -38,7 +36,11 @@ class ProductController extends Controller
 
     $product = new Products([
       'name' => $request->get('name'),
-      'category_id' => $request->get('category'),
+      /* 
+       *  Usando função associate() para associar a categoria com a subcategoria
+      '*  Antes: 'subcategory_id' => $request->get('subcategory')
+       *  Agora: $product->subcategory()->associate($request->get('subcategory'));
+       */
       'description' => $request->get('description'),
       'price_per_unit' => $request->get('price_per_unit'),
       'basic_unit' => $request->get('basic_unit'),
@@ -52,6 +54,7 @@ class ProductController extends Controller
       $product->active_for_sale = 'Ativo';
     }
 
+    $product->subcategory()->associate($request->get('subcategory'));
     $product->save();
 
     if ($request->hasFile('product_image')) {
@@ -72,8 +75,8 @@ class ProductController extends Controller
   public function edit($id)
   {
     $product = Products::find($id);
-    $categories = Categories::all();
-    return view('admin.product_edit', compact('product', 'categories'));
+    $subcategories = Subcategories::all();
+    return view('admin.product_edit', compact('product', 'subcategories'));
   }
 
   public function update(StoreItemRegistration $request, $id)
@@ -83,7 +86,7 @@ class ProductController extends Controller
 
     $product = Products::find($id);
     $product->name = $request->get('name');
-    $product->category_id = $request->get('category');
+    $product->subcategory_id = $request->get('subcategory');
     $product->description = $request->get('description');
     $product->price_per_unit = $request->get('price_per_unit');
     $product->basic_unit = $request->get('basic_unit');

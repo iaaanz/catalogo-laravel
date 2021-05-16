@@ -74,10 +74,10 @@
                 </select>
               </div>
               <div class="form-group col-md-2">
-                <label for="category">Categoria</label>
-                <select id="category" class="form-control" name="category">
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id === $product->category_id ? 'selected' : ''}}>{{ $category->name }}</option>
+                <label for="subsubcategory">Categoria</label>
+                <select id="subsubcategory" class="form-control" name="subcategory">
+                  @foreach ($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}" {{ $subcategory->id === $product->subcategory_id ? 'selected' : ''}}>{{ $subcategory->name }}</option>
                   @endforeach
                 </select>
               </div>

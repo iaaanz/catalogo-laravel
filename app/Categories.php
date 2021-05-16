@@ -13,11 +13,6 @@ class Categories extends Model
 
   public $timestamps = false;
 
-  public function product()
-  {
-    return $this->hasMany(Products::class, 'category_id');
-  }
-
   public function subcategory()
   {
     return $this->hasMany(Subcategories::class, 'category_id');

@@ -5,24 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Subcategories;
 use App\Categories;
+use App\Products;
 
 class SubcategoriesController extends Controller
 {
 
   public function index()
   {
-    $var = Subcategories::all();
-    // $var = Categories::find(2)->subcategory;
-    return $var;
+    // Tras a subcategoria vinculada ao produto
+    // $var = Products::find(1)->subcategory;
+
+    // Tras os produtos vinculados a subcategoria
+    // $var = Subcategories::find(1)->product;
+
+    // Tras as subcategorias vinculadas a categoria
+    // $var = Categories::find(1)->subcategory;
+
+    // Tras a categoria vinculada a subcategoria
+    // $var = Subcategories::find(1)->category;
+
+    // return $var;
   }
 
   public function store(Request $request)
   {
     $subcategory = new Subcategories([
       'name' => $request->get('subcategory'),
-      'category_id' => $request->get('category_id')
+      /* 
+       *  Usando função associate() para associar a categoria com a subcategoria
+       *  Antes: category_id' => $request->get('category_id')
+       *  Agora: $subcategory->category()->associate($request->get('category_id'));
+       */
     ]);
-
+    $subcategory->category()->associate($request->get('category_id'));
     $subcategory->save();
 
     session()->flash('success', 'Subcategoria cadastrada com sucesso!');

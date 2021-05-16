@@ -8,7 +8,7 @@ class Products extends Model
 {
   protected $fillable = [
     'name',
-    'category_id',
+    'subcategory_id',
     'description',
     'price_per_unit',
     'basic_unit',
@@ -24,8 +24,8 @@ class Products extends Model
     return $this->hasMany(ProductImage::class);
   }
 
-  public function category()
+  public function subcategory()
   {
-    return $this->belongsTo(Categories::class, 'category_id');
+    return $this->belongsTo(Subcategories::class, 'subcategory_id');
   }
 }
