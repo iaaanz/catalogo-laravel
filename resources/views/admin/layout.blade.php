@@ -9,6 +9,7 @@
   <title></title>
   <link rel="stylesheet" href="{{asset('css/bootstrap_admin.css')}}">
   <link rel="stylesheet" href="{{asset('css/style_dashboard.min.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
 <style>
   #overlay {
@@ -50,9 +51,9 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-dark">
           <div class="navbar-header" data-logobg="skin6">
             <a class="navbar-brand" href="/v1/test/dashboard">
-              <b class="logo-icon">
-                {{-- <img src="{{asset('plugins/images/logo-icon.png')}}" alt="homepage" /> --}}
-              </b>
+              {{-- <b class="logo-icon">
+                <img src="{{asset('plugins/images/logo-icon.png')}}" alt="homepage" />
+              </b> --}}
               <span class="logo-text">
                 <img src="{{asset('plugins/images/logo-text.png')}}" alt="homepage" />
               </span>
@@ -61,6 +62,34 @@
           </div>
           <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
             <ul class="navbar-nav ms-auto d-flex align-items-center">
+              {{-- <li class=" in">
+                <form role="search" class="app-search d-none d-md-block me-3">
+                  <input type="text" placeholder="Search..." class="form-control mt-0">
+                  <a href="" class="active">
+                    <i class="fa fa-search"></i>
+                  </a>
+                </form>
+              </li> --}}
+              <li>
+                <div class="dropdown show">
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <span class="text-white h4">{{ Auth::user()->name }}</span>
+                    <i class="fas fa-chevron-down me-2"></i>
+                  </a>
+                  
+                  <div class="dropdown-menu" style="left: -100px !important" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </nav>
@@ -122,6 +151,7 @@
       </footer>
     </div>
   </div>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="{{asset('js/app.js')}}" defer></script>
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/sidebarmenu.js')}}"></script>
