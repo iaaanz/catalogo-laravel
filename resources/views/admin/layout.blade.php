@@ -128,7 +128,7 @@
                   <span class="hide-menu">Acessos (em progresso)</span>
                 </a>
               </li>
-              <li class="sidebar-item">
+              {{-- <li class="sidebar-item">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/test/" aria-expanded="false">
                   <i class="fa fa-columns" aria-hidden="true"></i>
                   <span class="hide-menu">Blank Page</span>
@@ -139,7 +139,7 @@
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   <span class="hide-menu">Error 404</span>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </nav>
         </div>
@@ -156,7 +156,6 @@
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/sidebarmenu.js')}}"></script>
   <script src="{{asset('js/custom.js')}}"></script>
-  
   <script>
     $(document).ready(function() {
       $(".alert").fadeTo(3000, 500).slideUp(500, function() {

@@ -97,8 +97,8 @@
                 <tr>
                   <td>{{ $subcategory->id }}</td>
                   <td>{{ $subcategory->name }}</td>
-                  <td>{{ $subcategory->catName}}</td>
-                  <td> 3239 </td>
+                  <td>{{ $subcategory->catName }}</td>
+                  <td>{{ $subcategory->assocItens }} </td>
                   <td>
                     <span class="d-flex justify-content-end">
                       <button type="button" class="btn btn-primary" @click="editSubcategory({{json_encode($subcategory)}})">
