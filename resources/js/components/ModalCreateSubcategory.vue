@@ -98,9 +98,10 @@ export default {
       axios
         .get('/v1/admin/categorias/all')
         .then((res) => {
-          console.log(res.data);
-          this.loading = false;
-          this.categories = res.data;
+          if (res.status === 200) {
+            this.loading = false;
+            this.categories = res.data;
+          }
         })
         .catch((err) => {
           console.log(err);

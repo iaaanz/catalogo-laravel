@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 class CategoriesController extends Controller
 {
 
+    public function allCategories()
+    {
+        return Categories::all();
+    }
+
     public function index()
     {
         $categories = Categories::orderBy('id')->paginate(10, ['*'], 'categories');
